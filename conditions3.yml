@@ -1,0 +1,8 @@
+- hosts: all
+  tasks:
+  - stat:
+      path: /tmp/TEST
+    register: result
+  - debug:
+      msg: "when directory existse"
+    when: result.stat.exists == true and result.stat.isdir == true

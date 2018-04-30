@@ -1,0 +1,14 @@
+--- # Testing the J2 Template Module
+
+- hosts: all
+  connection: ssh
+  user: Ram
+  sudo: yes
+  gather_facts: yes
+  vars:
+    userName: ansile
+    userPassword: password123
+    connectionType: ssh
+  tasks:
+    - name: Install the configuration file customized for the system
+      template: src=file1.conf.j2 dest=/tmp/file.conf owner=Ram group=Ram mode=750

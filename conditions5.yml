@@ -1,0 +1,9 @@
+- hosts: all
+  vars:
+    test1: httpd
+    test2: git
+  tasks:
+  - debug:
+      msg: "Ansible when or example"
+  - command: sudo yum install httpd -y
+    when: test1 == httpd

@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    httpd_packages:
+      - httpd
+      - mod_wsgi
+  tasks:
+    - name: install httpd packages
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ httpd_packages }}"

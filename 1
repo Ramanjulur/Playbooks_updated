@@ -1,0 +1,15 @@
+---
+- hosts: all
+  tasks:
+  - command: /bin/abcd
+    register: result
+    ignore_errors: True
+
+  - command: date123
+    when: result is failed
+
+  - command: date
+    when: result is succeeded
+
+  - command: /bin/still/something_else
+    when: result is skipped

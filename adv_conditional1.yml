@@ -1,0 +1,11 @@
+---
+- hosts: local
+  tasks: 
+    - name: multiple items
+      file:
+       state: touch
+       path: /home/Ram/{{ item }}
+      with_items:
+       - file10
+       - file20
+       - file30

@@ -1,0 +1,10 @@
+---
+- hosts: local
+  tasks:
+    - name: multiple items
+      file:
+       state: directory
+       path: /tmp/{{ item[0] }}/{{ item[1] }}
+      with_nested:
+       - ['folder1','folder2']
+       - ['file1','file2','file3']

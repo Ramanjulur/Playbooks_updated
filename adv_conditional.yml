@@ -1,0 +1,11 @@
+---
+- hosts: local
+  sudo: yes
+  vars:
+    create_file: false
+  tasks:
+   - name: create a file
+     file: 
+       state: touch
+       path: /tmp/variable_was_true_new
+     when: not create_file

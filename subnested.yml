@@ -1,0 +1,18 @@
+---
+- hosts: all
+  vars:
+    users:
+     - name: Ram1
+       comments:
+         - 'some comments for Ram1'
+
+     - name: Ram123
+       comments:
+         - 'some comments for ram123' 
+
+  tasks:
+   - name: User Creation
+     shell: useradd -c "{{ item[0] }}" "{{ item[1] }}"
+     with_subelements:
+         - users
+         - comments

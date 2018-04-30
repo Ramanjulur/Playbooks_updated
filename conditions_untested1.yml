@@ -1,0 +1,14 @@
+- hosts: all
+  tasks:
+  - name: Ansible delete file glob
+    find:
+      paths: /etc/Ansible
+      patterns: *.txt
+    register: files_to_delete
+
+  - name: Ansible remove file glob
+    file:
+      path: "{{ item.path }}"
+      state: absent
+    with_items: "{{ files_to_delete.files }}"
+

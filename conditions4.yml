@@ -1,0 +1,19 @@
+---
+- hosts: all
+  tasks:
+  - name: main, based on this play, next plays will excute
+    command: date123
+    register: result
+    ignore_errors: yes
+
+  - name: if main is fail run this cmd
+    command: sudo yum install httpd -y
+    when: result is failed
+
+  - name: if main is success run this cmd
+    command: sudo yum install git -y
+    when: result is succeeded
+
+  - name: if main is skipp, run this cmd
+    command: /bin/still/something_else
+    when: result is skipped

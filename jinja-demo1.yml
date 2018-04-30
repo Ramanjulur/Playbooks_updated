@@ -1,0 +1,9 @@
+- hosts: all
+  vars:
+    list: ['abc','xyz',123']
+  tasks:
+    - name: Ansible template loop example
+      template:
+        src: file2.j2
+        dest: /tmp/sample.txt
+        mode: 0777

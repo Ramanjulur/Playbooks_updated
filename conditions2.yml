@@ -1,0 +1,11 @@
+- hosts: all
+  tasks:
+  - stat:
+      path: /tmp/test.txt
+    register: result
+  - debug:
+      msg: "file is not exists"
+    when: result.stat.exists == false
+  - debug:
+      msg: "file is exists."
+    when: result.stat.exists == true

@@ -1,0 +1,8 @@
+- hosts: all
+  tasks:
+   - stat:
+      path: /tmp/test.txt
+     register: result
+   - debug:
+      msg: "file already is there in server "
+     when: result.stat.exists
