@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  user: ansible
+ # user: ansible
   connection: ssh
   gather_facts: no
   tasks:
