@@ -1,6 +1,7 @@
 ---
 - hosts: all
  # user: ansible
+  become: yes
   connection: ssh
   gather_facts: no
   tasks:
