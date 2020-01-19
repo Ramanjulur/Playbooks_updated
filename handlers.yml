@@ -8,7 +8,7 @@
     - name: install httpd
       yum: name=httpd state=latest
       notify:
-      -  Restart HTTPD
+       -  Restart HTTPD
   handlers:
     - name: Restart HTTPD
       service: name=httpd state=restarted
