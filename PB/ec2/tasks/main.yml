@@ -1,0 +1,43 @@
+---
+# tasks file for ec2
+ - name: Setup public instances
+   ec2:
+      key_name: NVNEW
+      region: "{{ region }}"
+#      group_id: mygroup
+      instance_type: t2.micro
+      image: "{{ image_name }}"
+      count: 1
+      aws_access_key: "{{ aws_access_key_ID }}"
+      aws_secret_key: "{{ aws_secret_key }}"
+      wait: true
+
+      instance_tags:
+        Name: myserver
+        Host: myserver
+        Scope: public
+        Role: master
+      vpc_subnet_id: subnet-020532c2e69897b55
+   register: public_instances
+
+
+ - name: Setup private instances
+   ec2:
+      key_name: "{{ key_name }}"
+      region: "{{ region }}"
+ #     group_id: mygroup
+      instance_type: t2.micro
+      aws_access_key: "{{ aws_access_key_ID }}"
+      aws_secret_key: "{{ aws_secret_key }}"
+      image: "{{ image_name }}"
+      count: 1
+
+      instance_tags:
+        Name: myprivate
+        Host: myprivate
+        Scope: private
+        Role: worker
+      vpc_subnet_id: subnet-02bf60b846f1268e9
+#    with_sequence: count={{ number_workers }}
+   # register: private_instances
+

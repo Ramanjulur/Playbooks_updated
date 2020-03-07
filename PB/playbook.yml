@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  user: Ram
+  connection: local
+  gather_facts: False
+
+  roles:
+    - vpc_test
+
+

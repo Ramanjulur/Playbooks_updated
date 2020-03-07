@@ -1,0 +1,37 @@
+ - name: Setup public instances
+    ec2:
+      key_name: "{{ key_name }}"
+      region: "{{ region }}"
+      group_id: "{{ public_group.group_id }}"
+      instance_type: t2.micro
+      image: "{{ image_name }}"
+      exact_count: 1
+      wait: true
+      
+      instance_tags:
+        Name: myserver
+        Host: myserver
+        Scope: public
+        Role: master
+      vpc_subnet_id: "{{ public_network.subnet.id }}"
+    register: public_instances
+
+ 
+  - name: Setup private instances
+    ec2:
+      key_name: "{{ key_name }}"
+      region: "{{ region }}"
+      group_id: "{{ private_group.group_id }}"
+      instance_type: t2.micro
+      image: "{{ image_name }}"
+      exact_count: 1
+     
+      instance_tags:
+        Name: myprivate
+        Host: myprivate
+        Scope: private
+        Role: worker
+      vpc_subnet_id: "{{ private_network.subnet.id }}"
+    with_sequence: count={{ number_workers }}
+    register: private_instances
+
