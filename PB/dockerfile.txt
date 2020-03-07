@@ -1,0 +1,43 @@
+#
+# Build stage
+#
+FROM maven:3.6.0-jdk-11-slim AS build
+COPY aug-maven/NumberGenerator/src /home/app/src
+COPY aug-maven/NumberGenerator/pom.xml /home/app
+RUN mvn -f /home/app/pom.xml clean package
+
+#
+# Package stage
+#
+FROM ubuntu
+RUN apt-get update -y
+COPY --from=build /home/app/target/*.jar /opt/demo.jar
+#EXPOSE 8080
+#ENTRYPOINT ["java","-jar","/opt/demo.jar"]
+
+
+
+FROM centos
+
+MAINTAINER test@test.com
+
+RUN mkdir /opt/tomcat/
+RUN yum install wget -y
+WORKDIR /opt/tomcat
+RUN wget https://archive.apache.org/dist/tomcat/tomcat-8/v8.0.22/bin/apache-tomcat-8.0.22.tar.gz
+RUN tar xvfz apache*.tar.gz
+RUN mv apache-tomcat-8.0.22/* /opt/tomcat/.
+RUN yum -y install java
+RUN java -version
+
+WORKDIR /opt/tomcat/webapps
+COPY sample.war /opt/tomcat/webapps
+EXPOSE 8080
+
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+
+
+
+
+
+
