@@ -8,6 +8,6 @@
   ttl: 60
   number_masters: 1
   number_workers: 2
-  aws_access_key_ID: AKIA4HU2WTDB4KN4QO6K
-  aws_secret_key: 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 
+  aws_access_key_ID: ****
+  aws_secret_key: **** 
 
